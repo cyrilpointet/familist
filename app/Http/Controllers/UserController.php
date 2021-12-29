@@ -30,6 +30,8 @@ class UserController extends Controller
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
+        $user->todolists;
+
         return response()
             ->json(['user' => $user,'token' => $token, ]);
     }
@@ -45,6 +47,8 @@ class UserController extends Controller
         $user = User::where('email', $request['email'])->firstOrFail();
 
         $token = $user->createToken('auth_token')->plainTextToken;
+
+        $user->todolists;
 
         return response()
             ->json(['user' => $user,'token' => $token, ]);
@@ -63,6 +67,7 @@ class UserController extends Controller
     public function show(Request $request)
     {
         $user = $request->user();
+        $user->todolists;
         return response($user, 200);
     }
 

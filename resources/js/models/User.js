@@ -4,6 +4,15 @@ export class User {
         this.name = rawUser.name;
         this.email = rawUser.email;
         this.created_at = rawUser.created_at;
+        this.todolists = rawUser.todolists.map((list) => {
+            return {
+                id: list.id,
+                name: list.name,
+                createdAt: new Date(list.created_at).toLocaleDateString(
+                    "fr-FR"
+                ),
+            };
+        });
     }
 
     get createdAt() {
