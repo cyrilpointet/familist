@@ -1,0 +1,99 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+* {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.title {
+    @apply text-3xl uppercase font-bold;
+}
+
+.subtitle {
+    @apply text-xl capitalize font-bold;
+}
+
+.caption {
+    @apply text-sm;
+}
+
+strong {
+    @apply font-bold;
+}
+
+button {
+    @apply rounded-full bg-primary text-center py-2 px-4 text-white uppercase;
+    &[icon] {
+        @apply flex items-center justify-center p-2;
+    }
+    &[small] {
+        @apply  py-1 px-2 text-sm;
+    }
+    &[disabled] {
+        @apply bg-gray;
+    }
+}
+
+label {
+    @apply flex flex-col text-sm gap-1;
+    &[radio] {
+        @apply flex-row items-center gap-2 cursor-pointer;
+    }
+    span {
+        @apply text-error italic text-base;
+    }
+}
+
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=datetime-local],
+input[type=date] {
+    @apply p-2 border border-gray border-solid rounded-lg text-base;
+    transition: border-color .2s;
+    &:focus {
+        @apply border-primary;
+        outline: none;
+    }
+    &::placeholder {
+        @apply text-gray;
+    }
+}
+
+input[type=radio] {
+    @apply appearance-none border border-gray rounded-full w-4 h-4 relative cursor-pointer;
+    &:checked {
+        &:before {
+            @apply block absolute bg-primary rounded-full inset-0;
+            content: '';
+        }
+    }
+}
+
+.list {
+    @apply flex flex-col border-t border-gray;
+    li {
+        @apply p-2 border-b border-gray;
+    }
+    &.clickable {
+        li {
+            cursor: pointer;
+            transition: background-color .2s linear;
+            &:hover {
+                @apply bg-lightgray;
+            }
+        }
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale3d(0.3, 0.3, 0.3);
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
