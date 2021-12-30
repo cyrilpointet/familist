@@ -5,27 +5,17 @@
             <router-view />
         </div>
         <Confirm />
+        <AlertBar />
     </div>
 </template>
 
 <script>
-import { mapGetters, mapState } from "vuex";
 import HeaderBar from "./components/common/HeaderBar";
 import Confirm from "./components/common/Confirm";
+import AlertBar from "./components/common/AlertBar";
 
 export default {
     name: "App",
-    components: { HeaderBar, Confirm },
-    computed: {
-        ...mapState({
-            user: (state) => state.user.user,
-        }),
-        ...mapGetters({
-            isLogged: "user/isLogged",
-        }),
-    },
-    data: () => {
-        return {};
-    },
+    components: { HeaderBar, Confirm, AlertBar },
 };
 </script>

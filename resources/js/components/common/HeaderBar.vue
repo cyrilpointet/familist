@@ -41,7 +41,7 @@ export default {
 
 <style lang="scss" scoped>
 .header {
-    @apply bg-primary text-white;
+    @apply bg-primary text-white shadow-xl;
 }
 .main {
     @apply container mx-auto bg-primary text-white flex items-center py-2 gap-4;

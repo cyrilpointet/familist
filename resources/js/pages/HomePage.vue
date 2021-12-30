@@ -41,11 +41,19 @@ export default {
             });
         },
         async addList(name) {
-            const newList = await this.$store.dispatch(
-                "todolist/createList",
-                name
-            );
-            this.goToList(newList.id);
+            try {
+                const newList = await this.$store.dispatch(
+                    "todolist/createList",
+                    name
+                );
+                EventBus.$emit("alert", "Nouvelle liste crée");
+                this.goToList(newList.id);
+            } catch {
+                EventBus.$emit(
+                    "alert",
+                    "Une erreur est survenue. Réessayez plus tard."
+                );
+            }
         },
         confirmDelete(id) {
             EventBus.$emit("openConfirmModal", {
@@ -57,7 +65,15 @@ export default {
             });
         },
         async deleteList(id) {
-            await this.$store.dispatch("todolist/deleteList", id);
+            try {
+                await this.$store.dispatch("todolist/deleteList", id);
+                EventBus.$emit("alert", "Liste supprimée");
+            } catch {
+                EventBus.$emit(
+                    "alert",
+                    "Une erreur est survenue. Réessayez plus tard."
+                );
+            }
         },
     },
 };

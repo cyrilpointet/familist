@@ -24,6 +24,10 @@ strong {
 
 button {
     @apply rounded-full bg-primary text-center py-2 px-4 text-white uppercase;
+    transition: background-color 0.2s linear;
+    box-shadow: 3px 3px 5px theme("colors.primarylight") inset,
+    -3px -3px 5px theme("colors.primarydark") inset,
+    2px 2px 5px theme("colors.primarydark");
     &[icon] {
         @apply flex items-center justify-center p-2;
     }
@@ -32,6 +36,9 @@ button {
     }
     &[disabled] {
         @apply bg-gray;
+    }
+    &:hover {
+        @apply bg-primarylight;
     }
 }
 
@@ -79,9 +86,9 @@ input[type=radio] {
     &.clickable {
         li {
             cursor: pointer;
-            transition: background-color .2s linear;
+            transition: all .2s linear;
             &:hover {
-                @apply bg-lightgray;
+                box-shadow: 2px 2px 8px theme("colors.gray");
             }
         }
     }
@@ -115,4 +122,12 @@ input[type=radio] {
     50% {
         opacity: 1;
     }
+}
+
+.slide-enter-active, .slide-leave-active {
+    transition: all .5s;
+}
+.slide-enter, .slide-leave-to {
+    opacity: 0;
+    transform: translateY(-100%);
 }

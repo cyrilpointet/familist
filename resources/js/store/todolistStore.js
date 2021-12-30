@@ -34,5 +34,34 @@ export const todolistStore = {
             context.commit("user/removeList", id, { root: true });
             return;
         },
+        async addMember(context, values) {
+            const data = await ApiConsumer.post(
+                `todolist/${values.listId}/user`,
+                {
+                    id: values.userId,
+                }
+            );
+            const newList = new Todolist(data);
+            context.commit("setList", newList);
+            context.commit("user/updateList", data, { root: true });
+            return;
+        },
+        async removeMember(context, values) {
+            const data = await ApiConsumer.delete(
+                `todolist/${values.listId}/user`,
+                {
+                    id: values.userId,
+                }
+            );
+            if (values.userId === context.rootState.user.user.id) {
+                context.commit("setList", null);
+                context.commit("user/removeList", data.id, { root: true });
+            } else {
+                const newList = new Todolist(data);
+                context.commit("setList", newList);
+                context.commit("user/updateList", data, { root: true });
+            }
+            return;
+        },
     },
 };

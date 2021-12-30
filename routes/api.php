@@ -19,4 +19,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
 Route::middleware(['auth:sanctum', 'isListMember'])->group(function () {
     Route::get('/todolist/{id}', [TodolistController::class, 'read']);
     Route::delete('/todolist/{id}', [TodolistController::class, 'delete']);
+    Route::post('/todolist/{id}/user', [TodolistController::class, 'addMember']);
+    Route::delete('/todolist/{id}/user', [TodolistController::class, 'removeMember']);
 });

@@ -29,6 +29,18 @@ export const userStore = {
                 ),
             });
         },
+        updateList(state, list) {
+            state.user.todolists = state.user.todolists.filter((elem) => {
+                return elem.id !== list.id;
+            });
+            state.user.todolists.push({
+                id: list.id,
+                name: list.name,
+                createdAt: new Date(list.created_at).toLocaleDateString(
+                    "fr-FR"
+                ),
+            });
+        },
         removeList(state, id) {
             state.user.todolists = state.user.todolists.filter((list) => {
                 return list.id !== id;
