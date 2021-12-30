@@ -1,16 +1,23 @@
 <template>
     <div>
         <div v-if="!list">Loading</div>
-        <div v-else class="mt-8">
-            <h1 class="title">{{ list.name }}</h1>
-            <Accordion class="mt-4">
+        <div v-else class="mt-4">
+            <h1 class="title text-center">{{ list.name }}</h1>
+            <Accordion class="mt-4 bg-white p-2 shadow">
                 <template v-slot:title>
                     <p class="subtitle grow">Membres</p>
                 </template>
                 <template v-slot:body>
                     <ul class="list">
-                        <li v-for="member in list.users" :key="member.id">
-                            <p>{{ member.name }}</p>
+                        <li
+                            v-for="member in list.users"
+                            :key="member.id"
+                            class="flex items-center"
+                        >
+                            <p class="grow">{{ member.name }}</p>
+                            <button icon>
+                                <span class="material-icons">delete</span>
+                            </button>
                         </li>
                     </ul>
                 </template>

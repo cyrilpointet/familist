@@ -13,18 +13,26 @@ export const todolistStore = {
         },
     },
     actions: {
-        createList(context, values) {
-            ApiConsumer.post("todolist", values).then((data) => {
-                context.commit("setList", new Todolist(data));
-                return;
+        async createList(context, name) {
+            const data = await ApiConsumer.post("todolist", {
+                name: name,
             });
+            const newList = new Todolist(data);
+            context.commit("setList", newList);
+            context.commit("user/addList", data, { root: true });
+            return newList;
         },
-        getList(context, id) {
-            ApiConsumer.get(`todolist/${id}`).then((data) => {
-                console.log(data);
-                context.commit("setList", new Todolist(data));
-                return;
-            });
+        async getList(context, id) {
+            const data = await ApiConsumer.get(`todolist/${id}`);
+            const newList = new Todolist(data);
+            context.commit("setList", newList);
+            return newList;
+        },
+        async deleteList(context, id) {
+            await ApiConsumer.delete(`todolist/${id}`);
+            context.commit("setList", null);
+            context.commit("user/removeList", id, { root: true });
+            return;
         },
     },
 };

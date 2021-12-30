@@ -87,6 +87,25 @@ input[type=radio] {
     }
 }
 
+.modal {
+    @apply fixed inset-0 flex items-center justify-center;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 10;
+    &Card {
+        @apply bg-white;
+        width: 480px;
+        max-width: calc(100% - theme("spacing.4"));
+        animation-name: zoomIn;
+        animation-duration: 0.2s;
+    }
+    &Head {
+        @apply p-2 text-xl font-bold uppercase flex items-center bg-primary text-white;
+        .material-icons {
+            cursor: pointer;
+        }
+    }
+}
+
 @keyframes zoomIn {
     from {
         opacity: 0;

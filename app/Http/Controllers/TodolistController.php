@@ -26,11 +26,20 @@ class TodolistController extends Controller
         $todolist->users()->attach($user->id);
         $todolist->users;
 
-        return $todolist;
+        return response($todolist, 200);
     }
 
     public function read(Request $request)
     {
         return response($request->get('todolist'), 200);
+    }
+
+    public function delete(Request $request)
+    {
+        $todolist = $request->get('todolist');
+        $todolist->delete();
+        return response([
+            'message' => 'List deleted'
+        ], 200);
     }
 }

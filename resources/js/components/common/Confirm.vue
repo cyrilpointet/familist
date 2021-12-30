@@ -1,7 +1,7 @@
 <template>
-    <div v-if="show" class="background" @click="show = false">
-        <div class="card">
-            <div class="head">
+    <div v-if="show" class="modal" @click="show = false">
+        <div class="modalCard">
+            <div class="modalHead">
                 <span class="grow">{{ title }}</span>
                 <span class="material-icons" @click="show = false">close</span>
             </div>
@@ -40,23 +40,3 @@ export default {
     },
 };
 </script>
-
-<style lang="scss" scoped>
-.background {
-    @apply fixed inset-0 flex items-center justify-center;
-    background-color: rgba(0, 0, 0, 0.75);
-    z-index: 10;
-}
-.card {
-    @apply bg-white max-w-full;
-    width: 480px;
-    animation-name: zoomIn;
-    animation-duration: 0.2s;
-}
-.head {
-    @apply p-2 text-xl font-bold uppercase flex items-center bg-lightgray;
-    .material-icons {
-        cursor: pointer;
-    }
-}
-</style>

@@ -20,6 +20,20 @@ export const userStore = {
         setToken(state, value) {
             state.token = value;
         },
+        addList(state, list) {
+            state.user.todolists.push({
+                id: list.id,
+                name: list.name,
+                createdAt: new Date(list.created_at).toLocaleDateString(
+                    "fr-FR"
+                ),
+            });
+        },
+        removeList(state, id) {
+            state.user.todolists = state.user.todolists.filter((list) => {
+                return list.id !== id;
+            });
+        },
     },
     actions: {
         storeUserAndToken(context, value) {
