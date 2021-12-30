@@ -1,16 +1,13 @@
-export class User {
+export class Todolist {
     constructor(props) {
         this.id = props.id;
         this.name = props.name;
-        this.email = props.email;
         this.created_at = props.created_at;
-        this.todolists = props.todolists.map((list) => {
+        this.users = props.users.map((user) => {
             return {
-                id: list.id,
-                name: list.name,
-                createdAt: new Date(list.created_at).toLocaleDateString(
-                    "fr-FR"
-                ),
+                id: user.id,
+                name: user.name,
+                email: user.email,
             };
         });
     }

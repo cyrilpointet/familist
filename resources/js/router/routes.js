@@ -1,5 +1,6 @@
 import HomePage from "../pages/HomePage.vue";
 import LoginPage from "../pages/LoginPage.vue";
+import ListPage from "../pages/ListPage";
 
 export const Routes = [
     {
@@ -13,5 +14,11 @@ export const Routes = [
         name: "login",
         component: LoginPage,
         meta: { preloadUser: true },
+    },
+    {
+        path: "/list/:id",
+        name: "list",
+        component: ListPage,
+        meta: { requiresAuth: true },
     },
 ];

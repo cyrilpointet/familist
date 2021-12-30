@@ -19,6 +19,8 @@ class TodolistSeeder extends Seeder
             'name' => 'test todolist'
         ]);
         $todolist->users()->attach(1);
+        $todolist->users()->attach(2);
+        $todolist->users()->attach(3);
         $todolist->save();
     }
 }
