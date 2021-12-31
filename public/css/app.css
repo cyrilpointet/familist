@@ -466,6 +466,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mt-4 {
   margin-top: 1rem;
 }
+.mt-8 {
+  margin-top: 2rem;
+}
 .flex {
   display: flex;
 }
@@ -578,8 +581,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-family: "Ubuntu", sans-serif;
 }
 .title {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -767,7 +770,7 @@ input[type=radio]:checked:before {
 @-webkit-keyframes zoomIn {
   from {
     opacity: 0;
-    transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale(0.3);
   }
   50% {
     opacity: 1;
@@ -776,7 +779,7 @@ input[type=radio]:checked:before {
 @keyframes zoomIn {
   from {
     opacity: 0;
-    transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale(0.3);
   }
   50% {
     opacity: 1;

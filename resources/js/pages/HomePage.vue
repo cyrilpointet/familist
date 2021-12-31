@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2 class="subtitle mt-12 mb-4">Coucou {{ user.name }}</h2>
+        <h2 class="subtitle mt-8 mb-4">Coucou {{ user.name }}</h2>
         <ul class="list clickable bg-white">
             <li
                 v-for="list in user.todolists"

@@ -26,13 +26,16 @@ class TodolistController extends Controller
         $user = $request->user();
         $todolist->users()->attach($user->id);
         $todolist->users;
+        $todolist->products;
 
         return response($todolist, 200);
     }
 
     public function read(Request $request)
     {
-        return response($request->get('todolist'), 200);
+        $todolist = $request->get('todolist');
+        $todolist->products;
+        return response($todolist, 200);
     }
 
     public function delete(Request $request)
@@ -73,6 +76,7 @@ class TodolistController extends Controller
         $todolist->save();
         $todolist->refresh();
         $todolist->users;
+        $todolist->products;
         return response($todolist, 200);
     }
 
@@ -92,6 +96,7 @@ class TodolistController extends Controller
         $todolist->save();
         $todolist->refresh();
         $todolist->users;
+        $todolist->products;
         return response($todolist, 200);
     }
 }

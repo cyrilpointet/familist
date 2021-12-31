@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         DB::table('todolists_users')->truncate();
         $this->call(UserSeeder::class);
         $this->call(TodolistSeeder::class);
+        $this->call(ProductSeeder::class);
         Schema::enableForeignKeyConstraints();
     }
 }

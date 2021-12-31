@@ -7,7 +7,7 @@
 }
 
 .title {
-    @apply text-3xl uppercase font-bold;
+    @apply text-2xl uppercase font-bold;
 }
 
 .subtitle {
@@ -116,7 +116,7 @@ input[type=radio] {
 @keyframes zoomIn {
     from {
         opacity: 0;
-        transform: scale3d(0.3, 0.3, 0.3);
+        transform: scale(0.3);
     }
 
     50% {

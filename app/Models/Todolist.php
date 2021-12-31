@@ -21,4 +21,9 @@ class Todolist extends Model
             'todolist_id'
         );
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
