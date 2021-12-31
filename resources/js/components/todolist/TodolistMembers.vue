@@ -37,13 +37,17 @@ export default {
     computed: {
         ...mapState({
             list: (state) => state.todolist.todolist,
+            user: (state) => state.user.user,
         }),
     },
     methods: {
         confirmDelete(id) {
             EventBus.$emit("openConfirmModal", {
                 title: "Arrêter le partage",
-                content: "Voulez-vous supprimer ce membre de la liste ?",
+                content:
+                    id !== this.user.id
+                        ? "Voulez-vous supprimer ce membre de la liste ?"
+                        : "Voulez-vous quitter la liste ?",
                 action: () => {
                     this.removeMember(id);
                 },

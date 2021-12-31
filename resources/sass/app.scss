@@ -11,7 +11,7 @@
 }
 
 .subtitle {
-    @apply text-xl capitalize font-bold;
+    @apply text-lg capitalize font-bold;
 }
 
 .caption {
@@ -22,7 +22,7 @@ strong {
     @apply font-bold;
 }
 
-button {
+button, button[type=submit] {
     @apply rounded-full bg-primary text-center py-2 px-4 text-white uppercase;
     transition: background-color 0.2s linear;
     box-shadow: 3px 3px 5px theme("colors.primarylight") inset,
@@ -48,7 +48,7 @@ label {
         @apply flex-row items-center gap-2 cursor-pointer;
     }
     span {
-        @apply text-error italic text-base;
+        @apply text-error italic text-base text-sm;
     }
 }
 

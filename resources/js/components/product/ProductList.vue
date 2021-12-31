@@ -1,5 +1,6 @@
 <template>
     <div class="bg-white p-2 mt-4 shadow">
+        <p class="subtitle grow mb-2">Items</p>
         <ul class="list">
             <li
                 v-for="product in list.products"
@@ -14,6 +15,9 @@
                 >
                     <span class="material-icons">delete</span>
                 </button>
+            </li>
+            <li v-if="list.products.length < 1">
+                <p>Pas encore d'item dans la liste</p>
             </li>
             <li class="flex py-2 justify-end">
                 <InputModal title="Créer une liste" @done="addProduct" />

@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <h2 class="subtitle mt-8 mb-4">Coucou {{ user.name }}</h2>
-        <ul class="list clickable bg-white">
+    <div class="bg-white pt-2 mt-4 shadow">
+        <h2 class="subtitle mb-4 text-center">Listes de {{ user.name }}</h2>
+        <ul class="list clickable mx-2">
             <li
                 v-for="list in user.todolists"
                 :key="list.id"
@@ -13,9 +13,12 @@
                     <span class="material-icons">delete</span>
                 </button>
             </li>
+            <li v-if="user.todolists.length < 1">
+                <p>Pas encore de liste</p>
+            </li>
         </ul>
         <div class="flex py-2 justify-end">
-            <InputModal title="Créer une liste" @done="addList" class="mr-2" />
+            <InputModal title="Créer une liste" @done="addList" class="mr-4" />
         </div>
     </div>
 </template>

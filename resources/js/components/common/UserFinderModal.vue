@@ -58,7 +58,7 @@ export default {
                 });
                 EventBus.$emit("alert", "Nouvel utilisateur ajouté");
                 this.show = false;
-            } catch (e) {
+            } catch {
                 EventBus.$emit(
                     "alert",
                     "Une erreur est survenue. Réessayez plus tard."

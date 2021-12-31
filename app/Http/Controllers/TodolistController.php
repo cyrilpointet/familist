@@ -97,6 +97,13 @@ class TodolistController extends Controller
         $todolist->refresh();
         $todolist->users;
         $todolist->products;
-        return response($todolist, 200);
+        if ($todolist->users()->count() < 1) {
+            $todolist->delete();
+            return response([
+                'message' => 'No more users: list deleted'
+            ], 200);
+        } else {
+            return response($todolist, 200);
+        }
     }
 }

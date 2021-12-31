@@ -1,8 +1,8 @@
 <template>
-    <div class="w-96 mx-auto mt-12 flex flex-col gap-8">
+    <div class="w-96 mx-auto mt-4 flex flex-col gap-8 bg-white p-2 shadow">
         <Login v-if="hasAccount" />
         <Register v-else />
-        <span class="flex justify-center">
+        <span class="flex justify-center mb-4">
             <button small @click="hasAccount = !hasAccount">
                 {{
                     hasAccount ? "Je n'ai pas de compte" : "J'ai déjà un compte"

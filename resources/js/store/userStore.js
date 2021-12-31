@@ -42,6 +42,7 @@ export const userStore = {
             });
         },
         removeList(state, id) {
+            console.log(id);
             state.user.todolists = state.user.todolists.filter((list) => {
                 return list.id !== id;
             });
@@ -56,17 +57,10 @@ export const userStore = {
             localStorage.setItem("token", value.token);
         },
 
-        createUser(context, values) {
-            return new Promise((resolve, reject) => {
-                ApiConsumer.post("user/register", values)
-                    .then((data) => {
-                        context.dispatch("storeUserAndToken", data);
-                        resolve();
-                    })
-                    .catch((e) => {
-                        reject(e);
-                    });
-            });
+        async createUser(context, values) {
+            const data = await ApiConsumer.post("user/register", values);
+            context.dispatch("storeUserAndToken", data);
+            return;
         },
 
         logUser(context, values) {

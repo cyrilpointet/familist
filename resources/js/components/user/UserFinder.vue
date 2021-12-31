@@ -1,20 +1,21 @@
 <template>
     <div>
-        <div class="flex items-center gap-4">
+        <form @submit.prevent="findUser" class="flex items-center gap-4">
             <label class="grow"
                 >Email
                 <input
                     @keydown="hasSearched = false"
                     type="email"
-                    v-model="email"
+                    v-model.trim="$v.email.$model"
                     placeholder="email"
                 />
+                <span v-if="$v.email.$error">Email valide obligatoire</span>
             </label>
 
-            <button icon @click="findUser" class="mt-4" :disabled="ajaxPending">
+            <button icon type="submit" class="mt-4" :disabled="ajaxPending">
                 <span class="material-icons">search</span>
             </button>
-        </div>
+        </form>
 
         <div v-if="hasSearched">
             <div v-if="!userByMail" class="resultCard">
@@ -33,6 +34,7 @@
 <script>
 import { ApiConsumer } from "../../services/ApiConsumer";
 import { EventBus } from "../../services/EventBus";
+import { email, required } from "vuelidate/lib/validators";
 
 export default {
     name: "user-finder",
@@ -44,9 +46,19 @@ export default {
             ajaxPending: false,
         };
     },
+    validations: {
+        email: {
+            required,
+            email,
+        },
+    },
     methods: {
         async findUser() {
             this.userByMail = null;
+            this.$v.$touch();
+            if (this.$v.$invalid) {
+                return;
+            }
             this.ajaxPending = true;
             try {
                 const userByMail = await ApiConsumer.post("user/find", {
@@ -54,10 +66,12 @@ export default {
                 });
                 this.userByMail = userByMail;
             } catch (error) {
-                EventBus.$emit(
-                    "alert",
-                    "Une erreur est survenue. Réessayez plus tard."
-                );
+                if (error.response.status !== 404) {
+                    EventBus.$emit(
+                        "alert",
+                        "Une erreur est survenue. Réessayez plus tard."
+                    );
+                }
             }
             this.ajaxPending = false;
             this.hasSearched = true;

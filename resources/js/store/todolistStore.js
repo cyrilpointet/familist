@@ -66,7 +66,9 @@ export const todolistStore = {
             );
             if (values.userId === context.rootState.user.user.id) {
                 context.commit("setList", null);
-                context.commit("user/removeList", data.id, { root: true });
+                context.commit("user/removeList", values.listId, {
+                    root: true,
+                });
             } else {
                 const newList = new Todolist(data);
                 context.commit("setList", newList);
