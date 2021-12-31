@@ -10,6 +10,12 @@ export class Todolist {
                 email: user.email,
             };
         });
+        this.products = props.products.map((product) => {
+            return {
+                id: product.id,
+                name: product.name,
+            };
+        });
     }
 
     get createdAt() {

@@ -4,6 +4,7 @@
         <div v-else class="mt-4">
             <h1 class="title text-center">{{ list.name }}</h1>
             <TodolistMembers />
+            <ProductList />
         </div>
     </div>
 </template>
@@ -11,10 +12,11 @@
 <script>
 import { mapState } from "vuex";
 import TodolistMembers from "../components/todolist/TodolistMembers";
+import ProductList from "../components/product/ProductList";
 
 export default {
     name: "home-page",
-    components: { TodolistMembers },
+    components: { TodolistMembers, ProductList },
     computed: {
         ...mapState({
             user: (state) => state.user.user,

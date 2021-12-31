@@ -1,9 +1,7 @@
 <template>
     <header class="header">
         <div class="main px-2 md:px-0">
-            <h4 class="grow title">
-                {{ isLogged ? user.name : "Cissou" }}
-            </h4>
+            <h4 class="grow title">Team list</h4>
             <router-link v-if="isLogged" to="/">
                 <button icon>
                     <span class="material-icons">home</span>
@@ -18,14 +16,11 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
     name: "header-bar",
     computed: {
-        ...mapState({
-            user: (state) => state.user.user,
-        }),
         ...mapGetters({
             isLogged: "user/isLogged",
         }),

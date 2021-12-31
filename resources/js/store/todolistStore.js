@@ -11,6 +11,17 @@ export const todolistStore = {
         setList(state, value) {
             state.todolist = value;
         },
+        addProduct(state, product) {
+            state.todolist.products.push({
+                id: product.id,
+                name: product.name,
+            });
+        },
+        removeProduct(state, id) {
+            state.todolist.products = state.todolist.products.filter((elem) => {
+                return elem.id !== id;
+            });
+        },
     },
     actions: {
         async createList(context, name) {
@@ -61,6 +72,23 @@ export const todolistStore = {
                 context.commit("setList", newList);
                 context.commit("user/updateList", data, { root: true });
             }
+            return;
+        },
+        async addProduct(context, values) {
+            const product = await ApiConsumer.post(
+                `todolist/${values.listId}/product`,
+                {
+                    name: values.name,
+                }
+            );
+            context.commit("addProduct", product);
+            return;
+        },
+        async removeProduct(context, values) {
+            await ApiConsumer.delete(`todolist/${values.listId}/product`, {
+                id: values.productId,
+            });
+            context.commit("removeProduct", values.productId);
             return;
         },
     },
