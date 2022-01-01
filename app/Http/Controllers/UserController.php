@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Invitation;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -30,9 +31,14 @@ class UserController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        $token = $user->createToken('auth_token')->plainTextToken;
-
+        $invitations = Invitation::where('email', $user->email)->get();
+        foreach ($invitations as $invitation) {
+            $user->todolists()->attach($invitation->todolist_id);
+            $invitation->delete();
+        }
         $user->todolists;
+
+        $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()
             ->json(['user' => $user,'token' => $token, ]);

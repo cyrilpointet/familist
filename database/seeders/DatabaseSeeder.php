@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(TodolistSeeder::class);
         $this->call(ProductSeeder::class);
+        $this->call(InvitationSeeder::class);
         Schema::enableForeignKeyConstraints();
     }
 }

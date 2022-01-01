@@ -22,6 +22,12 @@ export const todolistStore = {
                 return elem.id !== id;
             });
         },
+        addInvitation(state, invitation) {
+            state.todolist.invitations.push({
+                id: invitation.id,
+                email: invitation.email,
+            });
+        },
     },
     actions: {
         async createList(context, name) {
@@ -91,6 +97,16 @@ export const todolistStore = {
                 id: values.productId,
             });
             context.commit("removeProduct", values.productId);
+            return;
+        },
+        async addInvitation(context, values) {
+            const invitation = await ApiConsumer.post(
+                `todolist/${values.listId}/invitation`,
+                {
+                    email: values.email,
+                }
+            );
+            context.commit("addInvitation", invitation);
             return;
         },
     },

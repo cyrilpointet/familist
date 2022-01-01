@@ -16,6 +16,12 @@ export class Todolist {
                 name: product.name,
             };
         });
+        this.invitations = props.invitations.map((invitation) => {
+            return {
+                id: invitation.id,
+                email: invitation.email,
+            };
+        });
     }
 
     get createdAt() {

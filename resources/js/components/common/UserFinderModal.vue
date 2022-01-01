@@ -12,7 +12,10 @@
                     </span>
                 </div>
                 <div class="p-4">
-                    <UserFinder @userSelected="addMember($event)" />
+                    <UserFinder
+                        @userSelected="addMember($event)"
+                        @inviteUser="inviteUser"
+                    />
                 </div>
             </div>
         </div>
@@ -64,6 +67,21 @@ export default {
                     "Une erreur est survenue. Réessayez plus tard."
                 );
             }
+        },
+        async inviteUser(email) {
+            try {
+                await this.$store.dispatch("todolist/addInvitation", {
+                    email: email,
+                    listId: this.list.id,
+                });
+                EventBus.$emit("alert", "Invitation envoyée");
+            } catch {
+                EventBus.$emit(
+                    "alert",
+                    "Une erreur est survenue. Réessayez plus tard."
+                );
+            }
+            this.show = false;
         },
     },
 };

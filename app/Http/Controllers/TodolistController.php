@@ -2,12 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Invitation;
 use App\Models\Todolist;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class TodolistController extends Controller
 {
+    private function populateTodolist(Todolist $todolist)
+    {
+        $todolist->users;
+        $todolist->products;
+        $todolist->invitations;
+        return $todolist;
+    }
+
     public function create(Request $request)
     {
         try {
@@ -25,8 +34,7 @@ class TodolistController extends Controller
         ]);
         $user = $request->user();
         $todolist->users()->attach($user->id);
-        $todolist->users;
-        $todolist->products;
+        $todolist = $this->populateTodolist($todolist);
 
         return response($todolist, 200);
     }
@@ -34,7 +42,7 @@ class TodolistController extends Controller
     public function read(Request $request)
     {
         $todolist = $request->get('todolist');
-        $todolist->products;
+        $todolist = $this->populateTodolist($todolist);
         return response($todolist, 200);
     }
 
@@ -75,8 +83,7 @@ class TodolistController extends Controller
         $todolist->users()->attach($request->id);
         $todolist->save();
         $todolist->refresh();
-        $todolist->users;
-        $todolist->products;
+        $todolist = $this->populateTodolist($todolist);
         return response($todolist, 200);
     }
 
@@ -95,8 +102,7 @@ class TodolistController extends Controller
         $todolist->users()->detach($request->id);
         $todolist->save();
         $todolist->refresh();
-        $todolist->users;
-        $todolist->products;
+        $todolist = $this->populateTodolist($todolist);
         if ($todolist->users()->count() < 1) {
             $todolist->delete();
             return response([
@@ -105,5 +111,31 @@ class TodolistController extends Controller
         } else {
             return response($todolist, 200);
         }
+    }
+
+    public function addInvitation(Request $request)
+    {
+        try {
+            $request->validate([
+                'email' => 'required|email',
+            ]);
+        } catch (\Exception $e) {
+            return response([
+                'message' => ['Invalid or missing fields']
+            ], 400);
+        }
+        $todolist = $request->get('todolist');
+        $invitation = Invitation::create([
+            'email' => $request->email,
+            'todolist_id' => $todolist->id
+        ]);
+
+        $user = $request->user();
+        $details = [
+            'guest' => $user->name,
+        ];
+        \Mail::to($request->email)->send(new \App\Mail\InvitationMail($details));
+
+        return response($invitation, 200);
     }
 }

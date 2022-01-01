@@ -26,4 +26,9 @@ class Todolist extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function invitations()
+    {
+        return $this->hasMany(Invitation::class);
+    }
 }

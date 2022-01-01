@@ -25,4 +25,6 @@ Route::middleware(['auth:sanctum', 'isListMember'])->group(function () {
 
     Route::post('/todolist/{id}/product', [ProductController::class, 'create']);
     Route::delete('/todolist/{id}/product', [ProductController::class, 'delete']);
+
+    Route::post('/todolist/{id}/invitation', [TodolistController::class, 'addInvitation']);
 });
